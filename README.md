@@ -1,7 +1,7 @@
 # ion.lua
 
 A JSON inspired compact data storage format designed for lua purposes.
-Stylised as "ion", simply all lowercase.
+This module's name is stylised as "ion", in all lowercase.
 
 ## LICENSE
 
@@ -9,23 +9,23 @@ This work is distributed under [CC BY-SA 4.0](https://creativecommons.org/licens
 
 ## Usage
 
-This module creates a file that stores data, called an "ion".<br>
+This module creates a file that stores data, called an "ion".\
 To begin, install the module somewhere into your codebase, then do something akin to:
 ```lua
 local ion = require("ion") -- Or, whatever the path to the module is.
 ```
-This section will cover both methods this module has to offer.
+This section will cover both methods this module has to offer.\
+Note that each method's name is case sensitive.
 
-### Create
+### ion.Create
 
 This function is used like this:
 ```lua
 ion.Create(Datatable,Filename,Blacklist)
 -- 1. Datatable - An array or dictionary that is desired to be saved onto an ion.
 -- 2. Filename - The name of the file that the data will be stored onto.
--- 3. Blacklist - An array or dictionary (though preferably the former) containing indices that will be excluded from storage.
+-- 3. Blacklist - An array or dictionary (though preferably the former) containing Datatable indices that will be excluded.
 ```
-<!-- -->
 Thus, an example ion being created looks like this:
 ```lua
 local db = {
@@ -59,7 +59,7 @@ ion:{
 ```
 It can be clearly noted that the "Gender" key has been excluded by the blacklist, and thus only the age has been stored.
 
-### Load
+### ion.Load
 Load takes only one argument, and is used like this:
 ```lua
 local nameOfTable = ion.Load(Path)
