@@ -1,6 +1,6 @@
 # ion.lua
 
-A JSON inspired compact data storage format designed for lua purposes.
+A JSON inspired compact data storage format designed for Lua purposes.
 This module's name is stylised as "ion", in all lowercase.
 
 ## LICENSE
