@@ -6,7 +6,7 @@ local function crawl(table,fp)
             local blacklisted = false
             if next(blacklist) ~= nil then
                   for j, w in pairs(blacklist) do
-                        if j ~= "isBlacklist" and w == i then
+                        if w == i then
                               blacklisted = true
                               break
                         end
@@ -141,4 +141,5 @@ function ion.Read(read)
             end
       end
 end
+
 return ion
