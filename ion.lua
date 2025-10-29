@@ -1,18 +1,20 @@
 local ion = {}
 
-local file,blacklist,prefix = nil,{},""
+local file,list,prefix,whitelist = nil,{},"",false
 local function crawl(table,fp)
       for i,v in pairs(table) do
-            local blacklisted = false
-            if next(blacklist) ~= nil then
-                  for j, w in pairs(blacklist) do
+            local blacklisted = (whitelist == true and true) or false
+            if type(list) == "table" and next(list) ~= nil then
+                  for _,w in pairs(list) do
                         if w == i then
-                              blacklisted = true
+                              blacklisted = not blacklisted
                               break
                         end
                   end
+            elseif fp ~= nil then
+                  print("WARNING: Invalid or empty blacklist")
             end
-            if blacklisted ~= true then
+            if blacklisted == false then
                   local index = i
                   if type(index) == "string" then
                         index = "|"..index:gsub("\\","\\\\"):gsub("\n","\\n"):gsub("\t","\\t")
@@ -44,12 +46,13 @@ local function crawl(table,fp)
       prefix = prefix:sub(1,-2)
 end
 
-function ion.Create(entries,name,bl)
+function ion.Create(entries,name,l,wl)
       prefix = ""
-      if bl ~= nil then
-            blacklist = bl
+      whitelist = wl
+      if list ~= nil then
+            list = l
       else
-            blacklist = {}
+            list = {}
       end
       if name == nil then
             name = "ion"
@@ -60,10 +63,13 @@ function ion.Create(entries,name,bl)
       file:close()
 end
 
+local function malformed(lineNumber,line)
+      error("ERROR: Malformed ion at line "..lineNumber..": "..line)
+end
 function ion.Read(read)
       local readIon = assert(io.open(read,"r"))
       if readIon == nil then
-            print("File does not exist: "..read)
+            error("ERROR: File does not exist: "..read)
             return
       end
       io.input(readIon)
@@ -76,13 +82,11 @@ function ion.Read(read)
             local k = readIon:read("l")
             lineNumber = lineNumber + 1
             if k == nil then
-                  print("Malformed or empty ion")
-                  return {}
+                  error("ERROR: Malformed or empty ion")
             end
             local k,count = k:gsub("\t", "")
             if count == 0 and k ~= "|ion:{" and k ~= "}" then
-                  print("Malformed ion at line "..lineNumber..": "..k)
-                  return {}
+                  malformed(lineNumber,k)
             end
             if k == "}" then
                   if count == 0 then
@@ -112,8 +116,7 @@ function ion.Read(read)
                               if key == "t" or key == "f" then
                                     finalKey = ((key == "t") and true) or false
                               else
-                                    print("Malformed ion at line "..lineNumber..": "..originalLine)
-                                    return {}
+                                    malformed(lineNumber,originalLine)
                               end
                         end
                   else
@@ -127,8 +130,7 @@ function ion.Read(read)
                                     if k == "t" or k == "f" then
                                           val = ((k == "t") and true) or false
                                     else
-                                          print("Malformed ion at line "..lineNumber..": "..originalLine)
-                                          return {}
+                                          malformed(lineNumber,originalLine)
                                     end
                               elseif count >= 1 then
                                     table.insert(levels,{finalKey,{}})
@@ -143,3 +145,4 @@ function ion.Read(read)
 end
 
 return ion
+
