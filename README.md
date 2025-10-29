@@ -21,10 +21,15 @@ Note that each method's name is case sensitive.
 
 This function is used like this:
 ```lua
-ion.Create(Datatable,Filename,Blacklist)
--- 1. Datatable - An array or dictionary that is desired to be saved onto an ion.
--- 2. Filename - The name of the file that the data will be stored onto.
--- 3. Blacklist - An array or dictionary (though preferably the former) containing Datatable indices that will be excluded.
+ion.Create(Datatable,Filename,Blacklist,Whitelist)
+--[[
+1. Datatable - An array or dictionary that is desired to be saved onto an ion.
+2. Filename - The name of the file that the data will be stored onto.
+3. List - An array or dictionary (though preferably the former) containing Datatable indices that will be excluded or included
+depending on Whitelist.
+4. Whitelist - Can be any value. If it's specifically set to true, then the provided List will act as a whitelist, and otherwise
+will be a blacklist.
+]]--
 ```
 Thus, an example ion being created looks like this:
 ```lua
