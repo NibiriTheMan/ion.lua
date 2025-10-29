@@ -4,6 +4,9 @@ local file,list,prefix,whitelist = nil,{},"",false
 local function crawl(table,fp)
       for i,v in pairs(table) do
             local blacklisted = (whitelist == true and true) or false
+            if type(v) == "function" then
+                  blacklisted = true
+            end
             if type(list) == "table" and next(list) ~= nil then
                   for _,w in pairs(list) do
                         if w == i then
@@ -145,4 +148,5 @@ function ion.Read(read)
 end
 
 return ion
+
 
