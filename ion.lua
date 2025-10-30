@@ -1,23 +1,39 @@
 local ion = {}
+local file,prefix,list,whitelist = nil,"",{},false
 
-local file,list,prefix,whitelist = nil,{},"",false
+local positrons,electrons = {},{}
+local function compare(table,i,v,result)
+      for _,w in pairs(table) do
+            if type(w) == "function" and w(v,i) == true then
+                  return not result
+            end
+      end
+      return result
+end
 local function crawl(table,fp)
       for i,v in pairs(table) do
-            local blacklisted = (whitelist == true and true) or false
+            local blacklisted,granted,denied = whitelist,false,false
             if type(v) == "function" then
                   blacklisted = true
-            end
-            if type(list) == "table" and next(list) ~= nil then
-                  for _,w in pairs(list) do
-                        if w == i then
-                              blacklisted = not blacklisted
-                              break
+            else
+                  if type(positrons) == "table" then
+                        granted = compare(positrons,i,v,granted)
+                  end
+                  if type(electrons) == "table" then
+                        denied = compare(electrons,i,v,denied)
+                  end
+                  if denied == granted then
+                        if type(list) == "table" then
+                              for _,w in pairs(list) do
+                                    if w == i then
+                                          blacklisted = not blacklisted
+                                          break
+                                    end
+                              end
                         end
                   end
-            elseif fp ~= nil then
-                  print("WARNING: Invalid or empty blacklist")
             end
-            if blacklisted == false then
+            if (blacklisted == false and denied == granted) or (denied == false and granted == true) then
                   local index = i
                   if type(index) == "string" then
                         index = "|"..index:gsub("\\","\\\\"):gsub("\n","\\n"):gsub("\t","\\t")
@@ -49,9 +65,11 @@ local function crawl(table,fp)
       prefix = prefix:sub(1,-2)
 end
 
-function ion.Create(entries,name,l,wl)
+function ion.Create(entries,name,l,wl,p,e)
       prefix = ""
-      whitelist = wl
+      whitelist = (wl == true and true) or false
+      positrons = p or {}
+      electrons = e or {}
       if list ~= nil then
             list = l
       else
@@ -148,5 +166,3 @@ function ion.Read(read)
 end
 
 return ion
-
-
