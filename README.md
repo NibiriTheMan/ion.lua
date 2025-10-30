@@ -72,7 +72,7 @@ A Positron/Electron will look something like this:
 ```lua
 local myPositrons = {
   function(Value,Key)
-    return Value == "Male" -- This boolean can take any form, as long as the boolean itself wouldn't error.
+    return Value == "Male" -- This boolean can take any form, as long as it wouldn't error.
   end
 }
 ```
