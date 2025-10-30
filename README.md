@@ -1,5 +1,4 @@
-# ion.lua
-
+# ion.lua (v = 1.0.0)
 A JSON inspired compact data storage format designed for Lua purposes.
 This module's name is stylised as "ion", in all lowercase.
 
@@ -19,9 +18,9 @@ Note that each method's name is case sensitive.
 
 ### ion.Create
 
-This function is used like this:
+This function is used like this: (For more information on Positrons and Electrons, see the dedicated section.)
 ```lua
-ion.Create(Datatable,Filename,Blacklist,Whitelist)
+ion.Create(Datatable,Filename,Blacklist,Whitelist,Positrons,Electrons)
 --[[
 1. Datatable - An array or dictionary that is desired to be saved onto an ion.
 2. Filename - The name of the file that the data will be stored onto.
@@ -29,6 +28,9 @@ ion.Create(Datatable,Filename,Blacklist,Whitelist)
 depending on Whitelist.
 4. Whitelist - Can be any value. If it's specifically set to true, then the provided List will act as a whitelist, and otherwise
 will be a blacklist.
+5. Positrons - An array of functions that return a boolean. If any boolean is true, then the entry will be allowed in, regardless
+of the blacklist/whitelist.
+6. Electrons - Same as above, with the difference being that they exclude regardless of the blacklist/whitelist.
 ]]--
 ```
 Thus, an example ion being created looks like this:
@@ -63,7 +65,51 @@ ion:{
 }
 ```
 It can be clearly noted that the "Gender" key has been excluded by the blacklist, and thus only the age has been stored.
-
+#### Positrons and Electrons
+A Positron/Electron will look something like this:
+```lua
+local myPositrons = {
+  function(Value,Key)
+    return Value == "Male" -- This boolean can take any form, as long as the boolean itself wouldn't error.
+  end
+}
+```
+Now, if ion.Create is run again, but with these Positrons:
+```lua
+ion.Create(db,"myIon",blacklist,false,myPositrons)
+```
+This will give a similar ion, but Bob's gender will also be listed.
+```
+ion:{
+  |People:{
+    |Bob:{
+      |Age:23
+      |Gender:|Male
+    }
+    |Alice:{
+      |Age:27
+    }
+  }
+}
+```
+This can also be used in the reverse via Electrons. If the same Positrons are passed, except as Electrons and with an empty Blacklist, like so:
+```lua
+ion.Create(db,"myIon",_,false,_,myPositrons)
+```
+Then the following ion will be produced:
+```
+ion:{
+  |People:{
+    |Bob:{
+      |Age:23
+    }
+    |Alice:{
+      |Age:27
+      |Gender:|Female
+    }
+  }
+}
+```
 ### ion.Load
 Load takes only one argument, and is used like this:
 ```lua
@@ -71,7 +117,7 @@ local nameOfTable = ion.Load(Path)
 -- nameOfTable - The name of your table.
 -- Path - Where you wish to seek for the ion.
 ```
-If, after having created the earlier ion at "myIon.ion", we can read its contents like so:
+If, after having created the first example ion at "myIon.ion", we can read its contents like so:
 ```lua
 local myDatabase = ion.Load("myIon.ion")
 ```
