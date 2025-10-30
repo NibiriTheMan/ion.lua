@@ -24,13 +24,14 @@ ion.Create(Datatable,Filename,Blacklist,Whitelist,Positrons,Electrons)
 --[[
 1. Datatable - An array or dictionary that is desired to be saved onto an ion.
 2. Filename - The name of the file that the data will be stored onto.
-3. List - An array or dictionary (though preferably the former) containing Datatable indices that will be excluded or included
-depending on Whitelist.
-4. Whitelist - Can be any value. If it's specifically set to true, then the provided List will act as a whitelist, and otherwise
-will be a blacklist.
-5. Positrons - An array of functions that return a boolean. If any boolean is true, then the entry will be allowed in, regardless
-of the blacklist/whitelist.
-6. Electrons - Same as above, with the difference being that they exclude regardless of the blacklist/whitelist.
+3. List - An array or dictionary (though preferably the former) containing
+Datatable indices that will be excluded or included depending on Whitelist.
+4. Whitelist - Can be any value. If it's specifically set to true,then the
+provided List will act as a whitelist, and otherwise will be a blacklist.
+5. Positrons - An array of functions that return a boolean. If any boolean is
+true, then the entry will be allowed in, regardless of the blacklist/whitelist.
+6. Electrons - Same as above, with the difference being that they exclude
+regardless of the blacklist/whitelist.
 ]]--
 ```
 Thus, an example ion being created looks like this:
@@ -72,7 +73,7 @@ A Positron/Electron will look something like this:
 ```lua
 local myPositrons = {
   function(Value,Key)
-    return Value == "Male" -- This boolean can take any form, as long as it wouldn't error.
+    return Value == "Male" -- This boolean can take any form, as long as the boolean itself wouldn't error.
   end
 }
 ```
