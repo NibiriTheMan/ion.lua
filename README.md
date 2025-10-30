@@ -95,6 +95,8 @@ ion:{
 This can also be used in the reverse via Electrons. If the same Positrons are passed, except as Electrons and with an empty Blacklist, like so:
 ```lua
 ion.Create(db,"myIon",_,false,_,myPositrons)
+-- NOTE: The same variable is being used in this example for demonstration purposes.
+-- Electrons, in practice, should be named clearly.
 ```
 Then the following ion will be produced:
 ```
