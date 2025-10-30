@@ -125,7 +125,6 @@ function ion.Read(read)
                   key,_ = key:gsub(":[^:]+$","")
             end
             k,_ = k:gsub(key..":", "")
-            print(key,k)
             if k ~= "}" then
                   k, valueIsString = k:gsub("^|", "")
                   key, keyIsString = key:gsub("^|", "")
@@ -166,3 +165,4 @@ function ion.Read(read)
 end
 
 return ion
+
