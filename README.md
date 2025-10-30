@@ -65,7 +65,9 @@ ion:{
 }
 ```
 It can be clearly noted that the "Gender" key has been excluded by the blacklist, and thus only the age has been stored.
+
 #### Positrons and Electrons
+
 A Positron/Electron will look something like this:
 ```lua
 local myPositrons = {
@@ -112,7 +114,9 @@ ion:{
   }
 }
 ```
+
 ### ion.Load
+
 Load takes only one argument, and is used like this:
 ```lua
 local nameOfTable = ion.Load(Path)
