@@ -1,5 +1,6 @@
 local ion = {}
 local file,prefix,list,whitelist = nil,"",{},false
+local noOp = false
 
 local positrons,electrons = {},{}
 local function compare(table,i,v,result)
@@ -11,6 +12,9 @@ local function compare(table,i,v,result)
       return result
 end
 local function crawl(table,fp)
+      if file == nil then
+            error("Something went wrong with file definition")
+      end
       for i,v in pairs(table) do
             local blacklisted,granted,denied = whitelist,false,false
             if type(v) == "function" then
@@ -34,13 +38,16 @@ local function crawl(table,fp)
                   end
             end
             if (blacklisted == false and denied == granted) or (denied == false and granted == true) then
+                  if noOp == true then
+                        noOp = false
+                  end
                   local index = i
                   if type(index) == "string" then
                         index = "|"..index:gsub("\\","\\\\"):gsub("\n","\\n"):gsub("\t","\\t")
                   elseif type(index) == "boolean" then
                         index = (i == true and "t") or (i == false and "f")
                   end
-                  file:write(prefix,"\t",index,":")
+                  file:write("\n",prefix,"\t",index,":")
                   local value = v
                   if type(value) == "table" then
                         value = "{"
@@ -52,16 +59,17 @@ local function crawl(table,fp)
                               value = (value == true and "t") or (value == false and "f") or v
                         end
                   end
-                  file:write(value,"\n")
+                  file:write(value)
                   if type(v) == "table" then
+                        noOp = true
                         crawl(v)
                   end
             end
       end
-      file:write(prefix,"}")
-      if fp == nil then
-            file:write("\n")
+      if fp ~= nil or noOp == false then
+            file:write("\n",prefix)
       end
+      file:write("}")
       prefix = prefix:sub(1,-2)
 end
 
@@ -79,7 +87,7 @@ function ion.Create(entries,name,l,wl,p,e)
             name = "ion"
       end
       name = name..".ion"
-      file = io.open(name,"w"); file:write("|ion:{\n"); file:close(); file = io.open(name,"a")
+      file = io.open(name,"w"); file:write("|ion:{"); file:close(); file = io.open(name,"a")
       crawl(entries,true)
       file:close()
 end
@@ -125,7 +133,7 @@ function ion.Read(read)
                   key,_ = key:gsub(":[^:]+$","")
             end
             k,_ = k:gsub(key..":", "")
-            if k ~= "}" then
+            if k ~= "}" and k ~= "{}" then
                   k, valueIsString = k:gsub("^|", "")
                   key, keyIsString = key:gsub("^|", "")
                   local val, finalKey
@@ -140,7 +148,7 @@ function ion.Read(read)
                               end
                         end
                   else
-                        finalKey,_ = key:gsub("\n","\n"):gsub("\\t","\t"):gsub([[\\]],"\\")
+                        finalKey,_ = key:gsub("\\n","\n"):gsub("\\t","\t"):gsub([[\\]],"\\")
                   end
                   if valueIsString == 0 then
                         if tonumber(k) ~= nil then
@@ -157,7 +165,7 @@ function ion.Read(read)
                               end
                         end
                   else
-                        val,_ = k:gsub("\n","\n"):gsub("\\t","\t"):gsub([[\\]],"\\")
+                        val,_ = k:gsub("\\n","\n"):gsub("\\t","\t"):gsub([[\\]],"\\")
                   end
                   levels[#levels][2][finalKey] = val
             end
@@ -165,4 +173,3 @@ function ion.Read(read)
 end
 
 return ion
-
