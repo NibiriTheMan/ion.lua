@@ -6,8 +6,8 @@
 ### v = 1.0.0
 Public release. Full list of features introduced in this update:
 - ion Creation:
-  - Datatables get turned into ions
-  - A blacklist can be used to exclude entries with particular keys; blacklists can be turned into whitelists
-  - Positrons and electrons can be done to perform further comparison operations
+  - Datatables get turned into ions.
+  - A blacklist can be used to exclude entries with particular keys; blacklists can be turned into whitelists.
+  - Positrons and electrons can be passed to perform further comparison operations.
 - ion Loading:
-  - ions can be turned back into tables by specifying the file path
+  - ions can be turned back into tables by specifying the file path.
