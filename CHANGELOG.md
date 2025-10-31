@@ -2,7 +2,7 @@
 ## v = 1.x.x
 ### v = 1.0.1
 - Adjusted logic. Empty tables are now displayed as simply `{}`, and the parser has been updated to detect this.
-- File is now checked for nil as an extra precaution.
+- Target file is now checked for `nil` when creating an ion as an extra precaution.
 ### v = 1.0.0
 Public release. Full list of features introduced in this update:
 - ion Creation:
