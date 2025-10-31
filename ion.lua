@@ -77,7 +77,7 @@ function ion.Create(entries,name,l,wl,p,e)
       whitelist = (wl == true and true) or false
       positrons = p or {}
       electrons = e or {}
-      if list ~= nil then
+      if type(l) == "table" then
             list = l
       else
             list = {}
@@ -172,3 +172,4 @@ function ion.Read(read)
 end
 
 return ion
+
