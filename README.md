@@ -26,7 +26,7 @@ ion.Create(Datatable,Filename,Blacklist,Whitelist,Positrons,Electrons)
 2. Filename - The name of the file that the data will be stored onto.
 3. List - An array or dictionary (though preferably the former) containing
 Datatable indices that will be excluded or included depending on Whitelist.
-4. Whitelist - Can be any value. If it's specifically set to true,then the
+4. Whitelist - Can be any value. If it's specifically set to true, then the
 provided List will act as a whitelist, and otherwise will be a blacklist.
 5. Positrons - An array of functions that return a boolean. If any boolean is
 true, then the entry will be allowed in, regardless of the blacklist/whitelist.
