@@ -1,6 +1,5 @@
 local ion = {}
 local file,prefix,list,whitelist = nil,"",{},false
-local noOp = false
 
 local positrons,electrons = {},{}
 local function compare(table,i,v,result)
@@ -11,10 +10,11 @@ local function compare(table,i,v,result)
       end
       return result
 end
-local function crawl(table,fp)
+local function crawl(table)
       if file == nil then
             error("Something went wrong with file definition")
       end
+      local noOp = true
       for i,v in pairs(table) do
             local blacklisted,granted,denied = whitelist,false,false
             if type(v) == "function" then
@@ -61,12 +61,11 @@ local function crawl(table,fp)
                   end
                   file:write(value)
                   if type(v) == "table" then
-                        noOp = true
                         crawl(v)
                   end
             end
       end
-      if fp ~= nil or noOp == false then
+      if noOp == false then
             file:write("\n",prefix)
       end
       file:write("}")
@@ -88,7 +87,7 @@ function ion.Create(entries,name,l,wl,p,e)
       end
       name = name..".ion"
       file = io.open(name,"w"); file:write("|ion:{"); file:close(); file = io.open(name,"a")
-      crawl(entries,true)
+      crawl(entries)
       file:close()
 end
 
