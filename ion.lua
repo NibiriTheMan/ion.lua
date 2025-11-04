@@ -1,5 +1,5 @@
 local ion = {}
-local file,prefix,list,whitelist = nil,"",{},false
+local file,prefix,list,whitelist = nil,"\t",{},false
 
 local positrons,electrons = {},{}
 local function compare(table,i,v,result)
@@ -47,7 +47,7 @@ local function crawl(table)
 			elseif type(index) == "boolean" then
 				index = (i == true and "t") or (i == false and "f")
 			end
-			file:write("\n",prefix,"\t",index,":")
+			file:write("\n",prefix,index,":")
 			local value = v
 			if type(value) == "table" then
 				value = "{"
@@ -65,15 +65,15 @@ local function crawl(table)
 			end
 		end
 	end
+	prefix = prefix:sub(1,-2)
 	if noOp == false then
 		file:write("\n",prefix)
 	end
 	file:write("}")
-	prefix = prefix:sub(1,-2)
 end
 
 function ion.Create(entries,name,l,wl,p,e)
-	prefix = ""
+	prefix = "\t"
 	whitelist = (wl == true and true) or false
 	positrons = p or {}
 	electrons = e or {}
@@ -100,39 +100,44 @@ function ion.Read(read)
 		error("ERROR: File does not exist: "..read)
 		return
 	end
-	io.input(readIon)
-	local levels = { {
+	local levels = {{
 		"",
 		{}
-	} }
-	local lineNumber = 0
+	}}
+	local lineNumber = 1
 	while true do
 		local k = readIon:read("l")
-		lineNumber = lineNumber + 1
-		if k == nil then
-			error("ERROR: Malformed or empty ion")
-		end
-		local k,count = k:gsub("\t", "")
-		if count == 0 and k ~= "|ion:{" and k ~= "}" then
-			malformed(lineNumber,k)
-		end
-		if k == "}" then
-			if count == 0 then
-				io.close(readIon)
-				return levels[1][2]
+		if lineNumber == 1 then
+			if k == nil then
+				error("ERROR: Empty ion")
+			elseif k ~= "|ion:{" then
+				error("ERROR: Corrupt or invalid ion")
 			else
+				k = readIon:read("l")
+			end
+		end
+		::start::
+		if k == nil then
+			return levels[1][2]
+		end
+		k,_ = k:gsub("\t", "")
+		lineNumber = lineNumber + 1
+		if k == "}" then
+			if #levels >= 2 then
 				levels[#levels - 1][2][levels[#levels][1]] = levels[#levels][2]
 				table.remove(levels, #levels)
 			end
+			k = readIon:read("l")
+			goto start
 		end
 		local valueIsString, keyIsString
 		local originalLine = k
-		key,firstPass = k:gsub(":|.+", "")
+		local key,firstPass = k:gsub(":|.+", "")
 		if firstPass == 0 then
 			key,_ = key:gsub(":[^:]+$","")
 		end
-		k,_ = k:gsub(key..":", "")
-		if k ~= "}" and k ~= "{}" then
+		k,_ = k:gsub(key..":","")
+		if k ~= "{}" then
 			k, valueIsString = k:gsub("^|", "")
 			key, keyIsString = key:gsub("^|", "")
 			local val, finalKey
@@ -159,7 +164,7 @@ function ion.Read(read)
 						else
 							malformed(lineNumber,originalLine)
 						end
-					elseif count >= 1 then
+					else
 						table.insert(levels,{finalKey,{}})
 					end
 				end
