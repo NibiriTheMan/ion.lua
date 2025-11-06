@@ -1,5 +1,5 @@
 local ion = {}
-local file,prefix,list,whitelist = nil,"\t",{},false
+local file,prefix,list,whitelist,compact = nil,"\t",{},false,false
 
 local positrons,electrons = {},{}
 local function compare(table,i,v,result)
@@ -20,12 +20,8 @@ local function crawl(table)
 		if type(v) == "function" then
 			blacklisted = true
 		else
-			if type(positrons) == "table" then
-				granted = compare(positrons,i,v,granted)
-			end
-			if type(electrons) == "table" then
-				denied = compare(electrons,i,v,denied)
-			end
+			granted = compare(positrons,i,v,granted)
+			denied = compare(electrons,i,v,denied)
 			if denied == granted then
 				if type(list) == "table" then
 					for _,w in pairs(list) do
@@ -42,49 +38,54 @@ local function crawl(table)
 				noOp = false
 			end
 			local index = i
-			if type(index) == "string" then
-				index = "|"..index:gsub("\\","\\\\"):gsub("\n","\\n"):gsub("\t","\\t")
-			elseif type(index) == "boolean" then
+			if type(i) == "string" then
+				index = "|"..i:gsub("\\","\\\\"):gsub("\n","\\n"):gsub("\t","\\t"):gsub("|","\\|")
+			elseif type(i) == "boolean" then
 				index = (i == true and "t") or (i == false and "f")
 			end
-			file:write("\n",prefix,index,":")
-			local value = v
-			if type(value) == "table" then
+			file:write("\n")
+			if compact ~= true then
+				file:write(prefix)
+			end
+			file:write(index,":")
+			local value
+			if type(v) == "table" then
 				value = "{"
-				prefix = prefix.."\t"
+				if compact ~= true then
+					prefix = prefix.."\t"
+				end
+				file:write(value)
+				crawl(v)
 			else
-				if type(value) == "string" then
-					value = "|"..value:gsub("\\","\\\\"):gsub("\n","\\n"):gsub("\t","\\t")
+				if type(v) == "string" then
+					value = "|"..v:gsub("\\","\\\\"):gsub("\n","\\n"):gsub("\t","\\t"):gsub("|","\\|")
 				else
 					value = (value == true and "t") or (value == false and "f") or v
 				end
-			end
-			file:write(value)
-			if type(v) == "table" then
-				crawl(v)
+				file:write(value)
 			end
 		end
 	end
-	prefix = prefix:sub(1,-2)
+	if compact ~= true then
+		prefix = prefix:sub(1,-2)
+	end
 	if noOp == false then
-		file:write("\n",prefix)
+		file:write("\n")
+		if compact == false then
+			file:write(prefix)
+		end
 	end
 	file:write("}")
 end
 
-function ion.Create(entries,name,l,wl,p,e)
+function ion.Create(entries,name,noTabs,l,wl,p,e)
 	prefix = "\t"
+	compact = noTabs
 	whitelist = (wl == true and true) or false
-	positrons = p or {}
-	electrons = e or {}
-	if type(l) == "table" then
-		list = l
-	else
-		list = {}
-	end
-	if name == nil then
-		name = "ion"
-	end
+	positrons = (type(p) == "table" and p) or {}
+	electrons = (type(e) == "table" and e) or {}
+	list = (type(l) == "table" and l) or {}
+	name = (type(name) == "string" and name) or "ion"
 	name = name..".ion"
 	file = io.open(name,"w"); file:write("|ion:{"); file:close(); file = io.open(name,"a")
 	crawl(entries)
@@ -98,7 +99,6 @@ function ion.Read(read)
 	local readIon = assert(io.open(read,"r"))
 	if readIon == nil then
 		error("ERROR: File does not exist: "..read)
-		return
 	end
 	local levels = {{
 		"",
@@ -110,7 +110,7 @@ function ion.Read(read)
 		if lineNumber == 1 then
 			if k == nil then
 				error("ERROR: Empty ion")
-			elseif k ~= "|ion:{" then
+			elseif k ~= "|ion:{" and k ~= "|ion:{}" then
 				error("ERROR: Corrupt or invalid ion")
 			else
 				k = readIon:read("l")
@@ -152,7 +152,7 @@ function ion.Read(read)
 					end
 				end
 			else
-				finalKey,_ = key:gsub("\\n","\n"):gsub("\\t","\t"):gsub([[\\]],"\\")
+				finalKey,_ = key:gsub("\\|","|"):gsub("\\n","\n"):gsub("\\t","\t"):gsub([[\\]],"\\")
 			end
 			if valueIsString == 0 then
 				if tonumber(k) ~= nil then
@@ -169,7 +169,7 @@ function ion.Read(read)
 					end
 				end
 			else
-				val,_ = k:gsub("\\n","\n"):gsub("\\t","\t"):gsub([[\\]],"\\")
+				val,_ = k:gsub("\\|","|"):gsub("\\n","\n"):gsub("\\t","\t"):gsub([[\\]],"\\")
 			end
 			levels[#levels][2][finalKey] = val
 		end
