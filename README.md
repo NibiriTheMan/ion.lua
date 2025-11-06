@@ -1,4 +1,4 @@
-# ion.lua (v = 1.1.0)
+# ion.lua (v = 1.2.0)
 A JSON inspired compact data storage format designed for Lua purposes.
 This module's name is stylised as "ion", in all lowercase.
 
@@ -20,17 +20,18 @@ Note that each method's name is case sensitive.
 
 This function is used like this: (For more information on Positrons and Electrons, see the dedicated section.)
 ```lua
-ion.Create(Datatable,Filename,Blacklist,Whitelist,Positrons,Electrons)
+ion.Create(Datatable,Filename,Compact,Blacklist,Whitelist,Positrons,Electrons)
 --[[
 1. Datatable - An array or dictionary that is desired to be saved onto an ion.
 2. Filename - The name of the file that the data will be stored onto.
-3. List - An array or dictionary (though preferably the former) containing
+3. Compact - If (and only if) true, indentation is not used in the final ion.
+4. List - An array or dictionary (though preferably the former) containing
 Datatable indices that will be excluded or included depending on Whitelist.
-4. Whitelist - Can be any value. If it's specifically set to true, then the
+5. Whitelist - Can be any value. If it's specifically set to true, then the
 provided List will act as a whitelist, and otherwise will be a blacklist.
-5. Positrons - An array of functions that return a boolean. If any boolean is
+6. Positrons - An array of functions that return a boolean. If any boolean is
 true, then the entry will be allowed in, regardless of the blacklist/whitelist.
-6. Electrons - Same as above, with the difference being that they exclude
+7. Electrons - Same as above, with the difference being that they exclude
 regardless of the blacklist/whitelist.
 ]]--
 ```
@@ -79,7 +80,7 @@ local myPositrons = {
 ```
 Now, if ion.Create is run again, but with these Positrons:
 ```lua
-ion.Create(db,"myIon",blacklist,false,myPositrons)
+ion.Create(db,"myIon",_,blacklist,false,myPositrons)
 ```
 This will give a similar ion, but Bob's gender will also be listed.
 ```
@@ -97,7 +98,7 @@ ion:{
 ```
 This can also be used in the reverse via Electrons. If the same Positrons are passed, except as Electrons and with an empty Blacklist, like so:
 ```lua
-ion.Create(db,"myIon",_,false,_,myPositrons)
+ion.Create(db,"myIon",_,_,false,_,myPositrons)
 -- NOTE: The same variable is being used in this example for demonstration purposes.
 -- Electrons, in practice, should be named clearly.
 ```
