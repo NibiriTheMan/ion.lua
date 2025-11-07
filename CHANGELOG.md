@@ -1,5 +1,11 @@
 # Changelog
 ## v = 1.x.x
+### v = 1.2.x
+#### v = 1.2.0
+- Parser overall given minor optimisations:
+    - "}" and the first line are both now quickly interpreted, then skipped to avoid unnecessary string operations.
+    - The variable that formerly tracked the number of tabs in a string has been removed, thus allowing an ion to include no tabs at all.
+- Tab logic overall adjusted. The "prefix" variable now has 1 tab by default instead of 0, and ion Creation has been overall adjusted to fit this.
 ### v = 1.1.x
 #### v = 1.1.0
 - Parser overall given minor optimisations:
