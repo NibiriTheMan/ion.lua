@@ -20,11 +20,11 @@ Note that each method's name is case sensitive.
 
 This function is used like this: (For more information on Positrons and Electrons, see the dedicated section.)
 ```lua
-ion.Create(Datatable,Filename,Compact,Blacklist,Whitelist,Positrons,Electrons)
+ion.Create(Datatable,Filename,Tabless,Blacklist,Whitelist,Positrons,Electrons)
 --[[
 1. Datatable - An array or dictionary that is desired to be saved onto an ion.
 2. Filename - The name of the file that the data will be stored onto.
-3. Compact - If (and only if) true, indentation is not used in the final ion.
+3. Tabless - If (and only if) true, indentation is not used in the final ion.
 4. List - An array or dictionary (though preferably the former) containing
 Datatable indices that will be excluded or included depending on Whitelist.
 5. Whitelist - Can be any value. If it's specifically set to true, then the
