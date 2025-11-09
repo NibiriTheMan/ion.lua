@@ -1,7 +1,7 @@
 :root{
   --borderColour: #100;
 h1{
-  border-bottom: 2px ridge var(--borderColour);
+  border-bottom: 3px double var(--borderColour);
 }
 h2{
   border-bottom: 2px solid var(--borderColour);
