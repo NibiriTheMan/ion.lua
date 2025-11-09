@@ -8,7 +8,7 @@ This work is distributed under [CC BY-SA 4.0](https://creativecommons.org/licens
 
 ## Prerequisites
 
-To use this module, you will need at least Lua 5.2+.
+To use this module, you will need at least Lua 5.2+ or LuaJIT 2.0+.
 
 ## Usage
 
