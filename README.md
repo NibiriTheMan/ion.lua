@@ -51,7 +51,7 @@ local db = {
 }
 
 local blacklist = {"Gender"}
-ion.Create(db,"myIon",blacklist)
+ion.Create(db,"myIon",_,blacklist)
 ```
 The resulting ion will look like so, having been created at "myIon.ion":
 ```
