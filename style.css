@@ -1,13 +1,13 @@
 :root{
   --borderColour: #100;
 h1{
-  border-bottom: 2px double var(--borderColour);
+  border-bottom: 2px ridge var(--borderColour);
 }
 h2{
   border-bottom: 2px solid var(--borderColour);
 }
 h3{
-  border-bottom: 2px slanted var(--borderColour);
+  border-bottom: 2px dashed var(--borderColour);
 }
 h4{
   border-bottom: 2px dotted var(--borderColour);
