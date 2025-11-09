@@ -1,0 +1,59 @@
+ <!DOCTYPE html>
+<html>
+    <head>
+        <title>Changelog</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <h1>Changelog</h1>
+        <h2>Table of Contents</h2>
+        <h2>v = 1.x.x</h2>
+        <div id="1.x.x">
+            <h3>v = 1.2.x</h3>
+            <div id="1.2.x">
+                <h4>v = 1.2.1</h4>
+                <ul><li>Boolean conversion logic slightly adjusted for optimisation and compatability.</li></ul>
+                <h4>v = 1.2.0</h4>
+                <ul>
+                    <li>"Tabless" mode added. If enabled, indentation is not used to save even more bytes.</li>
+                    <li>Bug-fixes and optimisations galore.</li>
+                </ul>
+            </div>
+            <h3>v = 1.1.x</h3>
+            <div id="1.1.x">
+                <h4>v = 1.1.0</h4>
+                <ul>
+                    <li>Parser overall given minor optimisations:
+                        <ul>
+                            <li>"}" and the first line are both now quickly interpreted, then skipped to avoid unnecessary string operations.</li>
+                            <li>The variable that formerly tracked the number of tabs in a string has been removed, thus allowing an ion to include no tabs at all.</li>
+                        </ul>
+                    </li>
+                    <li>Tab logic overall adjusted. The "prefix" variable now has 1 tab by default instead of 0, and ion Creation has been overall adjusted to fit this.</li>
+                </ul>
+            </div>
+            <h3>v = 1.0.x</h3>
+            <div id="1.0.x">
+                <h4>v = 1.0.1</h4>
+                <ul>
+                    <li>Adjusted logic. Empty tables are now displayed as simply `{}`, and the parser has been updated to detect this.</li>
+                    <li>Target file is now checked for `nil` when creating an ion as an extra precaution.</li>
+                </ul>
+                <h4>v = 1.0.0</h4>
+                <p>Public release. Full list of features introduced in this update:</p>
+                <ul>
+                    <li>ion Creation:
+                        <ul>
+                            <li>Datatables get turned into ions.</li>
+                            <li>A Blacklist can be used to exclude entries with particular keys; Blacklists can be turned into Whitelists.</li>
+                            <li>Positrons and Electrons can be passed to perform further comparison operations.</li>
+                        </ul>
+                    </li>
+                    <li>ion Loading:
+                        <ul><li>ions can be turned back into tables by specifying the file path.</li></ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </body>
+</html>
