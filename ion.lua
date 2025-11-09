@@ -41,7 +41,7 @@ local function crawl(table)
 			if type(i) == "string" then
 				index = "|"..i:gsub("\\","\\\\"):gsub("\n","\\n"):gsub("\t","\\t"):gsub("|","\\|")
 			elseif type(i) == "boolean" then
-				index = (i == true and "t") or (i == false and "f")
+				index = (i == true and "t") or "f"
 			end
 			file:write("\n")
 			if compact ~= true then
@@ -60,7 +60,10 @@ local function crawl(table)
 				if type(v) == "string" then
 					value = "|"..v:gsub("\\","\\\\"):gsub("\n","\\n"):gsub("\t","\\t"):gsub("|","\\|")
 				else
-					value = (value == true and "t") or (value == false and "f") or v
+					value = v
+					if type(value) == "boolean" then
+						value = (value == true and "t") or "f"
+					end
 				end
 				file:write(value)
 			end
@@ -81,7 +84,7 @@ end
 function ion.Create(entries,name,noTabs,l,wl,p,e)
 	prefix = "\t"
 	compact = noTabs
-	whitelist = (wl == true and true) or false
+	whitelist = wl == true
 	positrons = (type(p) == "table" and p) or {}
 	electrons = (type(e) == "table" and e) or {}
 	list = (type(l) == "table" and l) or {}
@@ -146,7 +149,7 @@ function ion.Read(read)
 					finalKey = tonumber(key)
 				else
 					if key == "t" or key == "f" then
-						finalKey = ((key == "t") and true) or false
+						finalKey = key == "t"
 					else
 						malformed(lineNumber,originalLine)
 					end
@@ -160,7 +163,7 @@ function ion.Read(read)
 				else
 					if k ~= "{" then
 						if k == "t" or k == "f" then
-							val = ((k == "t") and true) or false
+							val = k == "t"
 						else
 							malformed(lineNumber,originalLine)
 						end
