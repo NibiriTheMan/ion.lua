@@ -1,6 +1,8 @@
 # Changelog
 ## v = 1.x.x
 ### v = 1.2.x
+#### v = 1.2.1
+- Boolean conversion logic slightly adjusted for optimisation and compatability.
 #### v = 1.2.0
 - "Tabless" mode added. If enabled, indentation is not used to save even more bytes.
 - Bug-fixes and optimisations galore.
