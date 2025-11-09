@@ -4,11 +4,11 @@ h1{
   border-bottom: 3px double var(--borderColour);
 }
 h2{
-  border-bottom: 2px solid var(--borderColour);
+  border-bottom: 3px solid var(--borderColour);
 }
 h3{
-  border-bottom: 1px solid var(--borderColour);
+  border-bottom: 2px solid var(--borderColour);
 }
 h4{
-  border-bottom: 1px dashed var(--borderColour);
+  border-bottom: 2px dashed var(--borderColour);
 }
