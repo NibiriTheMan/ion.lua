@@ -11,8 +11,7 @@ body{
 }
 ul{
   text-align: left;
-  display: table;
-  margin: 0 auto;
+  width: 50%;
 }
 code{
   background-color: var(--borderColour);
