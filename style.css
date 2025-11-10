@@ -2,7 +2,8 @@ root{
   --borderColour: #100;
 }
 body{
-
+  text-align: center;
+  margin: auto;
 }
 h1{
   border-bottom: 4px double var(--borderColour);
