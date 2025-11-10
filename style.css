@@ -10,6 +10,7 @@ body{
   list-style-position: inside;
 }
 ul{
+  text-align: left;
   display: table;
   margin: 0 auto;
 }
