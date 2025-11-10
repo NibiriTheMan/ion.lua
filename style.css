@@ -11,6 +11,7 @@ body{
 }
 ul{
   text-align: left;
+  width: 70%;
 }
 code{
   background-color: var(--borderColour);
