@@ -14,7 +14,7 @@ ul{
   margin:auto;
   width: 50%;
 }
-ul ul{
+li ul{
   width: 100%;
 }
 code{
