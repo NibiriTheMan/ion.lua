@@ -4,6 +4,7 @@
 body{
   text-align: center;
   margin: auto;
+  list-style-position: inside
 }
 h1{
   border-bottom: 4px double var(--borderColour);
