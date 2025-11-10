@@ -11,7 +11,7 @@ body{
 }
 ul{
   text-align: left;
-  marin: auto;
+  margin: auto;
 }
 code{
   background-color: var(--borderColour);
