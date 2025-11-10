@@ -10,6 +10,10 @@ ul{
   text-align: left;
   display: inline-block;
 }
+code{
+  background-color: var(--borderColour);
+  text-colour: #FFF;
+}
 h1{
   border-bottom: 4px double var(--borderColour);
 }
