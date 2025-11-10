@@ -8,6 +8,7 @@ body{
 }
 ul{
   text-align: left;
+  display: inline-block;
 }
 h1{
   border-bottom: 4px double var(--borderColour);
