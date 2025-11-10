@@ -1,10 +1,12 @@
 :root{
-  --borderColour: #100;
+  --borderColour: #AAFFFF;
 }
 body{
   text-align: center;
   width: 75%;
   margin: auto;
+  background-color: #0f1b24;
+  color: #FFF
   list-style-position: inside;
 }
 ul{
@@ -12,7 +14,7 @@ ul{
 }
 code{
   background-color: var(--borderColour);
-  text-color: #FFF;
+  color: #000;
 }
 h1{
   border-bottom: 4px double var(--borderColour);
