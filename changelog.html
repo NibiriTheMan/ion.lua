@@ -25,7 +25,7 @@
                 <ul>
                     <li>Parser overall given minor optimisations:
                         <ul>
-                            <li>"}" and the first line are both now quickly interpreted, then skipped to avoid unnecessary string operations.</li>
+                            <li><code>}</code> and the first line are both now quickly interpreted, then skipped to avoid unnecessary string operations.</li>
                             <li>The variable that formerly tracked the number of tabs in a string has been removed, thus allowing an ion to include no tabs at all.</li>
                         </ul>
                     </li>
@@ -36,8 +36,8 @@
             <div id="1.0.x">
                 <h4>v = 1.0.1</h4>
                 <ul>
-                    <li>Adjusted logic. Empty tables are now displayed as simply `{}`, and the parser has been updated to detect this.</li>
-                    <li>Target file is now checked for `nil` when creating an ion as an extra precaution.</li>
+                    <li>Adjusted logic. Empty tables are now displayed as simply <code>{}</code>, and the parser has been updated to detect this.</li>
+                    <li>Target file is now checked for <code>nil</code> when creating an ion as an extra precaution.</li>
                 </ul>
                 <h4>v = 1.0.0</h4>
                 <p>Public release. Full list of features introduced in this update:</p>
