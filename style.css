@@ -1,5 +1,9 @@
-:root{
+root{
   --borderColour: #100;
+}
+body{
+
+}
 h1{
   border-bottom: 4px double var(--borderColour);
 }
