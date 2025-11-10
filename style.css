@@ -10,8 +10,9 @@ body{
   list-style-position: inside;
 }
 ul{
+  display: table;
   text-align: left;
-  margin: auto;
+  margin: 0 auto;
 }
 code{
   background-color: var(--borderColour);
