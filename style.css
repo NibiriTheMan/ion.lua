@@ -14,7 +14,6 @@ ul{
   width: 50%;
 }
 ul > *{
-  text-align: left;
   width: 100%;
 }
 code{
