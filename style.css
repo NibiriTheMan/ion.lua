@@ -12,7 +12,7 @@ ul{
 }
 code{
   background-color: var(--borderColour);
-  text-colour: #FFF;
+  text-color: #FFF;
 }
 h1{
   border-bottom: 4px double var(--borderColour);
