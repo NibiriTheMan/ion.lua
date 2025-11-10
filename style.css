@@ -6,6 +6,9 @@ body{
   margin: auto;
   list-style-position: inside;
 }
+ul{
+  text-align: left;
+}
 h1{
   border-bottom: 4px double var(--borderColour);
 }
