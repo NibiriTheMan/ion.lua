@@ -7,10 +7,11 @@ body{
   margin: auto;
   background-color: #0f1b24;
   color: #FFF;
+  list-style-position: inside;
 }
 ul{
-  list-style: none;
-  text-align: left;
+  display: table;
+  margin: 0 auto;
 }
 code{
   background-color: var(--borderColour);
