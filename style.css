@@ -9,9 +9,6 @@ body{
   color: #FFF;
   list-style-position: inside;
 }
-body * {
-  padding: 5px;
-}
 ul{
   text-align: left;
   margin:auto;
@@ -27,13 +24,17 @@ code{
 }
 h1{
   border: 4px double var(--borderColour);
+  padding:5px;
 }
 h2{
   border: 2px solid var(--borderColour);
+  padding:5px;
 }
 h3{
   border-bottom: 2px solid var(--borderColour);
+  padding:5px;
 }
 h4{
   border-bottom: 2px dashed var(--borderColour);
+  padding:5px;
 }
