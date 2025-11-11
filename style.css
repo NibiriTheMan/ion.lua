@@ -18,8 +18,9 @@ li ul{
   width: 100%;
 }
 code{
-  background-color: var(--borderColour);
-  color: #000;
+  background-color: rgba(0,0,0,0.33);
+  padding: 4px;
+  border-radius: 2px;
 }
 h1{
   border-bottom: 4px double var(--borderColour);
