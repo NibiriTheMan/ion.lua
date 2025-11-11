@@ -20,8 +20,8 @@ ul{
 }
 .download{
   font-size: 17px;
-  text-align: center !important;
-  margin:auto;
+  text-align: center;
+  padding: 0px;
 }
 li ul{
   width: 100%;
