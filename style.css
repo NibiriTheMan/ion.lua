@@ -1,6 +1,9 @@
 :root{
   --borderColour: #DAC;
 }
+p{
+  font-size: 16px;
+}
 body{
   text-align: center;
   width: 75%;
