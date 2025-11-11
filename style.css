@@ -22,6 +22,10 @@ ul{
   text-align: center;
   padding: 0px;
 }
+.logo{
+  font-family: monospace;
+  color:#6f35be;
+}
 li ul{
   width: 100%;
 }
