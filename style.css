@@ -1,11 +1,11 @@
 :root{
-  --borderColour: #DEF;
+  --borderColour: #DAC;
 }
 body{
   text-align: center;
   width: 75%;
   margin: auto;
-  background-color: #0f1b24;
+  background-color: #190f26;
   color: #FFF;
   list-style-position: inside;
 }
