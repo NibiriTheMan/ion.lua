@@ -25,7 +25,6 @@ code{
 h1{
   border: 4px double var(--borderColour);
   padding:5px;
-  white-space: pre;
 }
 h1 a{
   font-size:20px;
