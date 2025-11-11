@@ -23,14 +23,18 @@ code{
   border-radius: 2px;
 }
 h1{
+  padding: 10px;
   border: 4px double var(--borderColour);
 }
 h2{
+  padding: 10px;
   border: 2px solid var(--borderColour);
 }
 h3{
+  padding: 10px;
   border-bottom: 2px solid var(--borderColour);
 }
 h4{
+  padding: 10px;
   border-bottom: 2px dashed var(--borderColour);
 }
