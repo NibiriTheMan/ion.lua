@@ -23,7 +23,7 @@ code{
   border-radius: 2px;
 }
 h1{
-  border-bottom: 4px double var(--borderColour);
+  border: 4px double var(--borderColour);
 }
 h2{
   border: 3px solid var(--borderColour);
