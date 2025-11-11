@@ -2,13 +2,15 @@
   --borderColour: #AAFFFF;
 }
 body{
-  padding: 5px;
   text-align: center;
   width: 75%;
   margin: auto;
   background-color: #0f1b24;
   color: #FFF;
   list-style-position: inside;
+}
+body * {
+  padding: 5px;
 }
 ul{
   text-align: left;
