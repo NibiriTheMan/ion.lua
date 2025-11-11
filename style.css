@@ -18,6 +18,11 @@ ul{
   margin:auto;
   width: 50%;
 }
+.download{
+  font-size: 17px;
+  text-align: center !important;
+  margin:auto;
+}
 li ul{
   width: 100%;
 }
