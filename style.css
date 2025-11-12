@@ -20,6 +20,7 @@ body{
   background-color: #190f26;
   color: #FFF;
   list-style-position: inside;
+  padding: 10px;
 }
 ul{
   font-size: 17px;
@@ -28,7 +29,7 @@ ul{
   width: 50%;
 }
 li{
-    padding: 5px 0 5px 0;
+    padding: 3px 0 3px 0;
 }
 li ul{
   width: 100%;
@@ -40,7 +41,7 @@ code{
 }
 h1{
   border: 4px double var(--borderColour);
-  padding:5px;
+  padding-bottom: 10px;
 }
 h1 a{
   font-size:20px;
