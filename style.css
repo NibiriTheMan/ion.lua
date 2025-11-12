@@ -41,20 +41,20 @@ code{
 }
 h1{
   border: 4px double var(--borderColour);
-  padding-bottom: 10px;
+  padding: 0 0 10px 0;
 }
 h1 a{
   font-size:20px;
 }
 h2{
   border: 2px solid var(--borderColour);
-  padding-bottom: 10px;
+  padding: 0 0 10px 0;
 }
 h3{
   border-bottom: 2px solid var(--borderColour);
-  padding-bottom: 10px;
+  padding: 0 0 10px 0;
 }
 h4{
   border-bottom: 2px dashed var(--borderColour);
-  padding-bottom: 10px;
+  padding: 0 0 10px 0;
 }
