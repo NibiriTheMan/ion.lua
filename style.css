@@ -1,6 +1,14 @@
 :root{
   --borderColour: #DAC;
 }
+.download{
+  text-align: center;
+  padding: 0px;
+}
+.logo{
+  font-family: monospace;
+  color:#6f35be;
+}
 p{
   font-size: 17px;
 }
@@ -19,16 +27,8 @@ ul{
   margin:auto;
   width: 50%;
 }
-.download{
-  text-align: center;
-  padding: 0px;
-}
-.logo{
-  font-family: monospace;
-  color:#6f35be;
-}
 li ul{
-  width: 100%;
+  padding: 5px 0 5px 0;
 }
 code{
   background-color: rgba(0,0,0,0.33);
