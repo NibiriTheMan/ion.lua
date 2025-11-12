@@ -48,13 +48,13 @@ h1 a{
 }
 h2{
   border: 2px solid var(--borderColour);
-  padding:5px;
+  padding-bottom: 10px;
 }
 h3{
   border-bottom: 2px solid var(--borderColour);
-  padding:5px;
+  padding-bottom: 10px;
 }
 h4{
   border-bottom: 2px dashed var(--borderColour);
-  padding:5px;
+  padding-bottom: 10px;
 }
