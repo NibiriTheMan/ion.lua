@@ -16,7 +16,7 @@ body{
   font-family: helvetica;
   text-align: center;
   width: 75%;
-  margin: auto;
+  margin: 0 auto 0 auto;
   background-color: #190f26;
   color: #FFF;
   list-style-position: inside;
@@ -41,20 +41,20 @@ code{
 }
 h1{
   border: 4px double var(--borderColour);
-  padding: 0 0 10px 0;
+  padding: 5px;
 }
 h1 a{
   font-size:20px;
 }
 h2{
   border: 2px solid var(--borderColour);
-  padding: 0 0 10px 0;
+  padding: 5px;
 }
 h3{
   border-bottom: 2px solid var(--borderColour);
-  padding: 0 0 10px 0;
+  padding: 5px;
 }
 h4{
   border-bottom: 2px dashed var(--borderColour);
-  padding: 0 0 10px 0;
+  padding: 5px;
 }
