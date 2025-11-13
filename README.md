@@ -4,7 +4,7 @@ This module's name is stylised as "ion", in all lowercase.
 
 ## LICENSE
 
-This work is distributed under [GNU GPL v3.0](https://www.gnu.org/licenses/gpl-3.0.html). See ion/COPYABLE.txt for more detail.
+This work [IS distributed](https://github.com/NibiriTheMan/ion.lua/blob/main/ion/COPYABLE.txt) under [GNU GPL v3.0](https://www.gnu.org/licenses/gpl-3.0.html).
 
 ## Prerequisites
 
