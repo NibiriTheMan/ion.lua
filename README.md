@@ -4,7 +4,7 @@ This module's name is stylised as "ion", in all lowercase.
 
 ## LICENSE
 
-This work [is](https://github.com/NibiriTheMan/ion.lua/blob/main/ion/COPYING) [distributed](https://github.com/NibiriTheMan/ion.lua/blob/main/ion/COPYING.LESSER) under [GNU LGPL v3.0](https://www.gnu.org/licenses/lgpl-3.0.html).
+This work [is distributed](https://github.com/NibiriTheMan/ion.lua/blob/main/ion/LICENSE) [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/).
 
 ## Prerequisites
 
