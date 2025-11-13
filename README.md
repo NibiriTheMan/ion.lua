@@ -8,7 +8,7 @@ This work is distributed under [GNU GPL v3.0](https://www.gnu.org/licenses/gpl-3
 
 ## Prerequisites
 
-To use this module, you will need at least Lua 5.2+ or LuaJIT 2.0+. Note that many dialects are incompatible, even if based on a compatible version of Lua or LuaJIT.
+To use this module, you will need at least Lua 5.2+ or LuaJIT 2.0+. Note that many dialects are incompatible, even if based on a compatible version of Lua or LuaJIT (e.g., Luau).
 
 ## Usage
 
