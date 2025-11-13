@@ -4,7 +4,7 @@ This module's name is stylised as "ion", in all lowercase.
 
 ## LICENSE
 
-This work is distributed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+This work is distributed under [GNU GPL v3.0]([https://creativecommons.org/licenses/by-sa/4.0/](https://www.gnu.org/licenses/gpl-3.0.html)). See ion/COPYABLE.txt for more detail.
 
 ## Prerequisites
 
