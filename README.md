@@ -13,7 +13,7 @@ To use this module, you will need at least Lua 5.2+ or LuaJIT 2.0+. Note that ma
 ## Usage
 
 This module creates a file that stores data, called an "ion".\
-To begin, install the module (from either Releases, https://nibiritheman.github.io/ion.lua/downloads.html, or from the root directory) somewhere into your codebase, then do something akin to:
+To begin, install the module (from either Releases, https://nibiritheman.github.io/ion.lua/about/downloads.html, or from the root directory) somewhere into your codebase, then do something akin to:
 ```lua
 local ion = require("ion") -- Or, whatever the path to the module is.
 ```
