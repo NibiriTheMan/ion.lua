@@ -1,4 +1,4 @@
-# ion.lua (v = 1.2.2)
+# ion.lua (v = 1.3.0)
 A JSON inspired compact data storage format designed for Lua purposes.
 This module's name is stylised as "ion", in all lowercase.
 
