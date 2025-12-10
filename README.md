@@ -121,16 +121,16 @@ ion:{
 }
 ```
 
-### ion.Load
+### ion.Read
 
-Load takes only one argument, and is used like this:
+Read takes only one argument, and is used like this:
 ```lua
-local nameOfTable = ion.Load(Path)
+local nameOfTable = ion.Read(Path)
 -- nameOfTable - The name of your table.
 -- Path - Where you wish to seek for the ion.
 ```
 If, after having created the first example ion at "myIon.ion", we can read its contents like so:
 ```lua
-local myDatabase = ion.Load("myIon.ion")
+local myDatabase = ion.Read("myIon.ion")
 ```
 This will give us back our original database (with the "Gender" index having been deleted).
