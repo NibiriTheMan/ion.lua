@@ -60,7 +60,7 @@ ion.Create(db,"myIon",_,blacklist)
 ```
 The resulting ion will look like so, having been created at "myIon.ion":
 ```
-ion:{
+|ion:{
   |People:{
     |Bob:{
       |Age:23
@@ -89,7 +89,7 @@ ion.Create(db,"myIon",_,blacklist,false,myPositrons)
 ```
 This will give a similar ion, but Bob's gender will also be listed.
 ```
-ion:{
+|ion:{
   |People:{
     |Bob:{
       |Age:23
@@ -109,7 +109,7 @@ ion.Create(db,"myIon",_,_,false,_,myPositrons)
 ```
 Then the following ion will be produced:
 ```
-ion:{
+|ion:{
   |People:{
     |Bob:{
       |Age:23
