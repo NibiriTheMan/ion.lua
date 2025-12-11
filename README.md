@@ -1,7 +1,7 @@
 # ion.lua (v = "1.3.0")
 A JSON inspired compact data storage format designed for Lua purposes.
 This module's name is stylised as "ion", in all lowercase.
-It has absolutely no association with a somewhat similar Apple product, and was created without knowledge of it.
+It has absolutely no association with a somewhat similar Amazon product, and was created without knowledge of it.
 
 ## LICENSE
 
