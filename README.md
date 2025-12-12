@@ -55,7 +55,7 @@ local db = {
 }
 
 local blacklist = {"Gender"}
-ion.Create(db,"myIon",_,blacklist)
+ion.Create(db,"myIon",false,blacklist)
 ```
 The resulting ion will look like so, having been created at "myIon.ion":
 ```
@@ -84,7 +84,7 @@ local myPositrons = {
 ```
 Now, if ion.Create is run again, but with these Positrons:
 ```lua
-ion.Create(db,"myIon",_,blacklist,false,myPositrons)
+ion.Create(db,"myIon",false,blacklist,{},myPositrons)
 ```
 This will give a similar ion, but Bob's gender will also be listed.
 ```
@@ -102,7 +102,7 @@ This will give a similar ion, but Bob's gender will also be listed.
 ```
 This can also be used in the reverse via Electrons. If the same Positrons are passed, except as Electrons and with an empty Blacklist, like so:
 ```lua
-ion.Create(db,"myIon",_,_,false,_,myPositrons)
+ion.Create(db,"myIon",false,{},false,{},myPositrons)
 -- NOTE: The same variable is being used in this example for demonstration purposes.
 -- Electrons, in practice, should be named clearly.
 ```
