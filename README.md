@@ -7,6 +7,7 @@ This module's name is stylised as "ion", in all lowercase.
 This work [is distributed](https://github.com/NibiriTheMan/ion.lua/blob/main/LICENSE) under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/).
 
 ## Attributions
+
 - u/DapperCow15 for the idea of removing semicolons in v = "2.0.0".
 
 ## Prerequisites
