@@ -8,7 +8,7 @@ This work [is distributed](https://github.com/NibiriTheMan/ion.lua/blob/main/LIC
 
 ## Attributions
 
-- u/DapperCow15 for the idea of removing semicolons in v = "2.0.0".
+- u/DapperCow15 for the idea of removing semicolons for string and table values in v = "2.0.0".
 
 ## Prerequisites
 
