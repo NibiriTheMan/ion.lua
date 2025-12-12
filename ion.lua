@@ -10,7 +10,7 @@ local function compare(table,i,v)
 	end
 	return false
 end
-local function crawl(table)
+local function crawl(table,fp)
 	if file == nil then
 		error("Something went wrong with file definition")
 	end
@@ -35,6 +35,7 @@ local function crawl(table)
 		end
 		if (granted and not denied) or ((denied == granted) and not blacklisted) then
 			if noOp then
+				file:write(string.char(10))
 				noOp = false
 			end
 			local index
@@ -46,11 +47,10 @@ local function crawl(table)
 					index = (index and "t") or "f"
 				end
 			end
-			file:write(string.char(10))
 			if not tabless then
 				file:write(prefix)
 			end
-			file:write(index,":")
+			file:write(index)
 			local value
 			if type(v) == "table" then
 				value = "{"
@@ -67,21 +67,22 @@ local function crawl(table)
 					if type(value) == "boolean" then
 						value = (value and "t") or "f"
 					end
+					value = ":"..value
 				end
-				file:write(value)
+				file:write(value,string.char(10))
 			end
 		end
 	end
 	if not tabless then
 		prefix = prefix:sub(1,-2)
-	end
-	if not noOp then
-		file:write(string.char(10))
-		if not tabless then
+		if not noOp then
 			file:write(prefix)
 		end
 	end
 	file:write("}")
+	if (not tabless or noOp) and not fp then
+		file:write(string.char(10))
+	end
 end
 
 function ion.Create(entries,name,noTabs,l,wl,p,e)
@@ -93,8 +94,8 @@ function ion.Create(entries,name,noTabs,l,wl,p,e)
 	list = (type(l) == "table" and l) or {}
 	name = (type(name) == "string" and name) or "ion"
 	name = name..".ion"
-	file = io.open(name,"w"); file:write("|ion:{"); file:close(); file = io.open(name,"a")
-	crawl(entries)
+	file = io.open(name,"w"); file:write("|ion{"); file:close(); file = io.open(name,"a")
+	crawl(entries,true)
 	file:close()
 end
 
@@ -112,68 +113,87 @@ function ion.Read(read)
 	}}
 	local lineNumber = 1
 	local k = readIon:read("l")
+	local legacyMode = false
 	if k == nil then
 		error("ERROR: Empty ion")
-	elseif k ~= "|ion:{" and k ~= "|ion:{}" then
+	elseif k == "|ion:{" or k == "|ion:{}" then
+		legacyMode = true
+		print("WARNING: Pre-2.0.0 ion detected, now converting.")
+	elseif k ~= "|ion{" and k ~= "|ion{}" then
 		error("ERROR: Corrupt or invalid ion")
 	end
+	local isTabless = false
 	::start::
 	k = readIon:read("l")
 	if k == nil then
+		if legacyMode then
+			ion.Create(levels[1][2],read:gsub("%.ion$",""),isTabless)
+		end
 		return levels[1][2]
 	end
 	lineNumber = lineNumber + 1
-	k = k:gsub("^\t+","")
-	if k == "}" then
-		if #levels >= 2 then
-			levels[#levels - 1][2][levels[#levels][1]] = levels[#levels][2]
-			table.remove(levels,#levels)
+	k,tabs = k:gsub("^\t+","")
+	local found = k:match("^}+")
+	if found ~= nil then
+		for _=1,#found do
+			if #levels >= 2 then
+				levels[#levels - 1][2][levels[#levels][1]] = levels[#levels][2]
+				table.remove(levels,#levels)
+			end
 		end
-		goto start
+		k = k:gsub(found,"")
+		if k == "" then
+			goto start
+		end
+	end
+	if tabs < 1 and legacyMode and not isTabless then
+		isTabless = true
 	end
 	local valueIsString, keyIsString
 	local originalLine = k
-	local key,firstPass = k:gsub(":|.+","")
-	if firstPass == 0 then
-		key = key:gsub(":[^:]+$","")
+	local key,firstPass = k:gsub("([^\\])|.*","%1")
+	if firstPass < 1 then
+		key = key:gsub(":[^:]+$",""):gsub("{}?$","")
+	elseif legacyMode then
+		key = key:gsub(":$","")
 	end
-	k = k:gsub(key..":","")
-	if k ~= "{}" then
-		k,valueIsString = k:gsub("^|","")
-		key,keyIsString = key:gsub("^|","")
-		local val,finalKey
-		if keyIsString == 0 then
-			if tonumber(key) ~= nil then
-				finalKey = tonumber(key)
+	k = k:gsub("^"..key:gsub("([%%%^%$%(%)%.%[%]%*%+%-%?])", "%%%1"), ""):gsub("^:", "")
+	k,valueIsString = k:gsub("^|","")
+	key,keyIsString = key:gsub("^|","")
+	local val,finalKey
+	if keyIsString < 1 then
+		if tonumber(key) ~= nil then
+			finalKey = tonumber(key)
+		else
+			if key == "t" or key == "f" then
+				finalKey = key == "t"
 			else
-				if key == "t" or key == "f" then
-					finalKey = key == "t"
+				malformed(lineNumber, originalLine)
+			end
+		end
+	else
+		finalKey = key:gsub("\\|","|"):gsub("\\n","\n"):gsub([[\\]],"\\")
+	end
+	if valueIsString < 1 then
+		if tonumber(k) ~= nil then
+			val = tonumber(k)
+		else
+			if k == "{" then
+				table.insert(levels,{finalKey,{}})
+			else
+				if k == "t" or k == "f" then
+					val = k == "t"
+				elseif k == "{}" then
+					val = {}
 				else
 					malformed(lineNumber, originalLine)
 				end
 			end
-		else
-			finalKey = key:gsub("\\|","|"):gsub("\\n","\n"):gsub([[\\]],"\\")
 		end
-		if valueIsString == 0 then
-			if tonumber(k) ~= nil then
-				val = tonumber(k)
-			else
-				if k ~= "{" then
-					if k == "t" or k == "f" then
-						val = k == "t"
-					else
-						malformed(lineNumber, originalLine)
-					end
-				else
-					table.insert(levels, { finalKey, {} })
-				end
-			end
-		else
-			val = k:gsub("\\|","|"):gsub("\\n","\n"):gsub([[\\]],"\\")
-		end
-		levels[#levels][2][finalKey] = val
+	else
+		val = k:gsub("\\|","|"):gsub("\\n","\n"):gsub([[\\]],"\\")
 	end
+	levels[#levels][2][finalKey] = val
 	goto start
 end
 
