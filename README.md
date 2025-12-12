@@ -6,6 +6,9 @@ This module's name is stylised as "ion", in all lowercase.
 
 This work [is distributed](https://github.com/NibiriTheMan/ion.lua/blob/main/LICENSE) under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/).
 
+## Attributions
+- u/DapperCow15 for the idea of removing semicolons in v = "2.0.0".
+
 ## Prerequisites
 
 To use this module, you will need at least Lua 5.2+ or LuaJIT 2.0+. Note that many dialects are incompatible, even if based on a compatible version of Lua or LuaJIT (e.g., Luau).
