@@ -14,6 +14,11 @@
         <div id="2.x.x">
             <h3>v = "2.0.x"</h3>
             <div id="2.0.x">
+                <h4>v = "2.0.1"</h4>
+                <ul>
+                    <li>Fixed bug where keys could not end in <code>\\</code> without resulting in that line becoming malformed.</li>
+                    <li>Made certain sections of the code more consistent.</li>
+                </ul>
                 <h4>v = "2.0.0"</h4>
                 <ul>
                     <li>Colons are now completely dropped for tables, and the header has thus changed to <code>|ion{</code> as well. If the old header is detected, then it converts to the new way of structuring things.</li>
